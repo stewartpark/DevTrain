@@ -16,8 +16,8 @@ except:
 PIN_CTRL = 11
 PWM = None
 
-FORWARD_SLOW =  45
-BACKWARD_SLOW = 36
+FORWARD_SLOW =  60
+BACKWARD_SLOW = 37
 FORWARD_FAST = 100
 BACKWARD_FAST = 0
 
@@ -26,7 +26,7 @@ def go(dutycycle):
     if PWM:
         PWM.stop()
     GPIO.setup(PIN_CTRL, GPIO.OUT)
-    PWM = GPIO.PWM(PIN_CTRL, 50)
+    PWM = GPIO.PWM(PIN_CTRL, 30)
     PWM.start(dutycycle)
 
 
