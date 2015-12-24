@@ -1,5 +1,6 @@
 try:
     import RPi.GPIO as GPIO
+    GPIO.setmode(GPIO.BOARD)
 except:
     class GPIO(object):
         """Fake class to test it on PC."""
