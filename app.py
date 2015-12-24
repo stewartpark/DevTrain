@@ -12,11 +12,15 @@ while True:
         print path
         last_commit = repo['last_commit']
         branch = repo['branch']
-        
-        lc = Repo(path).commit(branch).hexsha
-        if lc != last_commit:
-            run_train = True
-            repos[i]['last_commit'] = lc
+        r = Repo(path)
+        try:
+            r.remotes.origin.pull()
+            lc = r.commit(branch).hexsha
+            if lc != last_commit:
+                run_train = True
+                repos[i]['last_commit'] = lc
+        except:
+            print 'Oops.'
 
     if run_train:
         print 'Chu chu~~~'
