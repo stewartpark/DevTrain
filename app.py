@@ -15,13 +15,13 @@ def index():
 
 @app.route("/go_forward")
 def go_forward():
-    control.go_forward()
+    control.go(0.2)
     return redirect("/")
 
 
 @app.route("/go_backward")
 def go_backward():
-    control.go_backward()
+    control.go(-0.2)
     return redirect("/")
 
 
