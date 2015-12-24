@@ -6,11 +6,20 @@ except:
         """Fake class to test it on PC."""
         OUT = IN = 0
         @staticmethod
-        def setup(cls, *args):
+        def setup(*args):
             pass
         @staticmethod
-        def output(cls, *args):
+        def output(*args):
             pass
+        @staticmethod
+        def start(*args):
+            pass
+        @staticmethod
+        def stop(*args):
+            pass
+        @staticmethod
+        def PWM(*args):
+            return GPIO
 
 # Hardware config
 PIN_CTRL = 11

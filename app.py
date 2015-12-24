@@ -1,35 +1,28 @@
-from flask import Flask, redirect
+from git import Repo
+import json
 import control
+import time
 
-app = Flask(__name__)
-app.debug = True
+repos = json.load(open("./repos.json"))
 
+while True:
+    run_train = False
+    for i, repo in enumerate(repos):
+        path = repo['path']
+        print path
+        last_commit = repo['last_commit']
+        branch = repo['branch']
+        
+        lc = Repo(path).commit(branch).hexsha
+        if lc != last_commit:
+            run_train = True
+            repos[i]['last_commit'] = lc
 
-@app.route("/")
-def index():
-    return """
-        <a href="/go_forward">Forward</a><br />
-        <a href="/go_backward">Backward</a><br />
-        <a href="/stop">Stop</a><br />
-    """
-
-@app.route("/go_forward")
-def go_forward():
-    control.go(control.FORWARD_SLOW)
-    return redirect("/")
-
-
-@app.route("/go_backward")
-def go_backward():
-    control.go(control.BACKWARD_SLOW)
-    return redirect("/")
-
-
-@app.route("/stop")
-def stop():
-    control.stop()
-    return redirect("/")
-
-
-if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    if run_train:
+        print 'Chu chu~~~'
+        control.go(control.FORWARD_SLOW)
+        time.sleep(5)
+        control.stop()
+        print 'Stopped.'
+    time.sleep(5)
+    json.dump(repos, open("./repos.json", "w"))    
