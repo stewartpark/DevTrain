@@ -25,7 +25,7 @@ while True:
     if run_train:
         print 'Chu chu~~~'
         control.go(control.FORWARD_SLOW)
-        time.sleep(5)
+        time.sleep(30)
         control.stop()
         print 'Stopped.'
     time.sleep(5)
