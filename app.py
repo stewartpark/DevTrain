@@ -26,7 +26,7 @@ while True:
         print 'Chu chu~~~'
         control.go(control.FORWARD_SLOW)
         time.sleep(7)
-        control.stop()
         print 'Stopped.'
+    control.stop()
     time.sleep(5)
     json.dump(repos, open("./repos.json", "w"))    
