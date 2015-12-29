@@ -19,14 +19,15 @@ while True:
             if lc != last_commit:
                 run_train = True
                 repos[i]['last_commit'] = lc
-        except:
-            print 'Oops.'
+        except Exception, e:
+            print 'Oops.', e
 
     if run_train:
         print 'Chu chu~~~'
         control.go(control.FORWARD_SLOW)
         time.sleep(7)
         print 'Stopped.'
-    control.stop()
+        control.stop()
     time.sleep(5)
+    control.stop()
     json.dump(repos, open("./repos.json", "w"))    
