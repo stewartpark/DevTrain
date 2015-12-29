@@ -29,5 +29,4 @@ while True:
         print 'Stopped.'
         control.stop()
     time.sleep(5)
-    control.stop()
     json.dump(repos, open("./repos.json", "w"))    
