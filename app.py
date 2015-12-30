@@ -23,7 +23,8 @@ while True:
             print 'Oops.', e
 
     if run_train:
-        print 'Chu chu~~~'
+        print 'Choo~~~'
+        control.choo()
         control.go(control.FORWARD_SLOW)
         time.sleep(7)
         print 'Stopped.'

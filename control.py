@@ -21,6 +21,8 @@ except:
         def PWM(*args):
             return GPIO
 
+import os
+
 # Hardware config
 PIN_CTRL = 11
 PWM = None
@@ -46,3 +48,6 @@ def stop():
     if PWM:
         PWM.stop()
         PWM = None
+
+def choo():
+    os.system("play sounds/choo.mp3 &")  # needs sox installed.
