@@ -21,8 +21,8 @@ def git_diff_changes(repo, commit_1, commit_2):
         returns the value of --shortstat in dictionary form
     """
     git = repo.git
-    commit_1_hash = commit_1.name_rev.split()[0]
-    commit_2_hash = commit_2.name_rev.split()[0]
+    commit_1_hash = commit_1.hexsha
+    commit_2_hash = commit_2.hexsha
     short_stats = git.diff("--shortstat", commit_1_hash, commit_2_hash)
     stats = short_stats.split(',')
     return {
