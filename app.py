@@ -1,9 +1,52 @@
-from git import Repo
 import json
-import control
+import math
 import time
 
+from git import Repo
+
+import control
+
 repos = json.load(open("./repos.json"))
+
+
+def git_diff_changes(repo, commit_1, commit_2):
+    """
+    Description:
+        Get the Number of changes that occured between two commits
+    Keyword Arguments:
+        repo: a GitPython repo object
+        commit_1: a GitPython commit object
+        commit_2: a GitPython commit object
+    Return:
+        returns the value of --shortstat in dictionary form
+    """
+    git = repo.git
+    commit_1_hash = commit_1.name_rev.split()[0]
+    commit_2_hash = commit_2.name_rev.split()[0]
+    short_stats = git.diff("--shortstat", commit_1_hash, commit_2_hash)
+    stats = short_stats.split(',')
+    return {
+        'files_changed': int(stats[0].split()[0]),
+        'insertions': int(stats[1].split()[0]),
+        'deletions': int(stats[2].split()[0]),
+    }
+
+def time_to_run(num_changes, min_run_time, max_run_time):
+    """
+    Description:
+        Get the Number of changes that occured between two commits
+    Keyword Arguments:
+        num_changes: int representing the number of changes
+    Return:
+        number of seconds the train should run for in seconds
+    """
+    magic_num = 15
+    fraction_of_time_to_run = 1 / (magic_num + math.exp(-num_changes))
+    time_to_run = fraction_of_time_to_run * max_run_time
+    if time_to_run < min_run_time:
+        return min_run_time
+    else:
+        return time_to_run
 
 while True:
     run_train = False
@@ -30,4 +73,4 @@ while True:
         print 'Stopped.'
         control.stop()
     time.sleep(5)
-    json.dump(repos, open("./repos.json", "w"))    
+    json.dump(repos, open("./repos.json", "w"))
