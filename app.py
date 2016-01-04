@@ -25,7 +25,10 @@ def git_diff_changes(repo, commit_1, commit_2):
     commit_2_hash = commit_2.hexsha
     short_stats = git.diff("--shortstat", commit_1_hash, commit_2_hash)
     stats = short_stats.split(',')
-    return int(stats[1].split()[0]) + int(stats[2].split()[0])
+    try:
+        return int(stats[1].split()[0]) + int(stats[2].split()[0])
+    except:
+        return int(stats[1].split()[0])
 
 
 def time_to_run(num_changes, min_run_time, max_run_time):
