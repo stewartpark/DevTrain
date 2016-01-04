@@ -31,22 +31,13 @@ def git_diff_changes(repo, commit_1, commit_2):
         return int(stats[1].split()[0])
 
 
-def time_to_run(num_changes, min_run_time, max_run_time):
+def time_to_run(num_changes, min_run_time, max_run_time, changes_at_midpoint):
     """
-    Description:
-        Get the Number of changes that occured between two commits
-    Keyword Arguments:
-        num_changes: int representing the number of changes
-    Return:
-        number of seconds the train should run for in seconds
+    Exponentially interpolate the number of seconds the train should run based on the number of changes, between min_run_time and max_run_time.
+    Tuned by setting changes_at_midpoint, which is the number of changes required for the train to run for the average of the min and max run times.
     """
-    magic_num = 15
-    fraction_of_time_to_run = 1 / (magic_num + math.exp(-num_changes))
-    time_to_run = fraction_of_time_to_run * max_run_time
-    if time_to_run < min_run_time:
-        return min_run_time
-    else:
-        return time_to_run
+    exponent = num_changes * math.log(0.5) / changes_at_midpoint
+    return min_run_time + (max_run_time - min_run_time) * (1 - math.exp(exponent))
 
 
 if __name__ == '__main__':
@@ -71,7 +62,7 @@ if __name__ == '__main__':
             print 'Choo~~~'
             control.choo()
             control.go(control.FORWARD_SLOW)
-            time.sleep(time_to_run(changes, 5, 60))
+            time.sleep(time_to_run(changes, 5, 60, 100))
             print 'Stopped.'
             control.stop()
         time.sleep(5)
