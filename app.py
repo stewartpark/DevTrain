@@ -28,7 +28,10 @@ def git_diff_changes(repo, commit_1, commit_2):
     try:
         return int(stats[1].split()[0]) + int(stats[2].split()[0])
     except:
-        return int(stats[1].split()[0])
+        try:
+            return int(stats[1].split()[0])
+        except:
+            return 0
 
 
 def time_to_run(num_changes, min_run_time, max_run_time, changes_at_midpoint):
