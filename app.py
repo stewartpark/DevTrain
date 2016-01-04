@@ -65,7 +65,7 @@ if __name__ == '__main__':
             print 'Choo~~~'
             control.choo()
             control.go(control.FORWARD_SLOW)
-            time.sleep(time_to_run(changes, 5, 60, 100))
+            time.sleep(time_to_run(changes, 5, 30, 200))
             print 'Stopped.'
             control.stop()
         time.sleep(5)
