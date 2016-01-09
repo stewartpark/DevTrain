@@ -24,7 +24,8 @@ except:
 import os
 
 # Hardware config
-PIN_CTRL = 11
+PIN_SPEED_CTRL = 11
+PIN_STOP_CTRL = 13
 PWM = None
 
 FORWARD_SLOW =  79
@@ -37,14 +38,16 @@ def go(dutycycle):
     if PWM:
         PWM.stop()
         PWM = None
-    GPIO.setup(PIN_CTRL, GPIO.OUT)
-    PWM = GPIO.PWM(PIN_CTRL, 30)
+    GPIO.setup(PIN_SPEED_CTRL, GPIO.OUT)
+    PWM = GPIO.PWM(PIN_SPEED_CTRL, 30)
     PWM.start(dutycycle)
+    GPIO.setup(PIN_STOP_CTRL, GPIO.IN)
 
 
 def stop():
     global PWM
-    GPIO.setup(PIN_CTRL, GPIO.IN)
+    GPIO.setup(PIN_SPEED_CTRL, GPIO.IN)
+    GPIO.setup(PIN_STOP_CTRL, GPIO.OUT)
     if PWM:
         PWM.stop()
         PWM = None
