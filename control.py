@@ -28,8 +28,8 @@ PIN_SPEED_CTRL = 11
 PIN_STOP_CTRL = 13
 PWM = None
 
-FORWARD_SLOW =  79
-BACKWARD_SLOW = 37
+FORWARD_SLOW =  50
+BACKWARD_SLOW = 25
 FORWARD_FAST = 100
 BACKWARD_FAST = 0
 
@@ -39,7 +39,7 @@ def go(dutycycle):
         PWM.stop()
         PWM = None
     GPIO.setup(PIN_SPEED_CTRL, GPIO.OUT)
-    PWM = GPIO.PWM(PIN_SPEED_CTRL, 9600)
+    PWM = GPIO.PWM(PIN_SPEED_CTRL, 30)
     PWM.start(dutycycle)
     GPIO.setup(PIN_STOP_CTRL, GPIO.OUT)
 
