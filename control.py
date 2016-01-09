@@ -41,7 +41,6 @@ def go(dutycycle):
     GPIO.setup(PIN_SPEED_CTRL, GPIO.OUT)
     PWM = GPIO.PWM(PIN_SPEED_CTRL, 30)
     PWM.start(dutycycle)
-    GPIO.output(PIN_STOP_CTRL, 0)
     GPIO.setup(PIN_STOP_CTRL, GPIO.IN)
 
 
