@@ -48,7 +48,7 @@ def stop():
     global PWM
     GPIO.setup(PIN_SPEED_CTRL, GPIO.IN)
     GPIO.setup(PIN_STOP_CTRL, GPIO.OUT)
-    GPIO.output(PIN_STOP_CTRL, 1)
+    GPIO.output(PIN_STOP_CTRL, 0)
     if PWM:
         PWM.stop()
         PWM = None
