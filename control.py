@@ -54,6 +54,6 @@ def choo():
     os.system("play sounds/choo.mp3 &")  # needs sox installed.
 
 def is_pushed():
-    GPIO.setup(PIN_GO_FORWARD_BTN, GPIO.IN)
+    GPIO.setup(PIN_GO_FORWARD_BTN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     return GPIO.input(PIN_GO_FORWARD_BTN)
 
