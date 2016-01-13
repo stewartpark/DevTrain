@@ -25,6 +25,7 @@ import os
 
 # Hardware config
 PIN_SPEED_CTRL = 11
+PIN_GO_FORWARD_BTN = 13
 PWM = None
 
 FORWARD_SLOW =  50
@@ -51,3 +52,8 @@ def stop():
 
 def choo():
     os.system("play sounds/choo.mp3 &")  # needs sox installed.
+
+def is_pushed():
+    GPIO.setup(PIN_GO_FORWARD_BTN, GPIO.IN)
+    return GPIO.input(PIN_GO_FORWARD_BTN)
+

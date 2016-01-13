@@ -61,7 +61,7 @@ if __name__ == '__main__':
             except Exception, e:
                 print 'Oops.', e
 
-        if changes:
+        if changes or control.is_pushed():
             print 'Choo~~~'
             control.choo()
             control.go(control.FORWARD_SLOW)
